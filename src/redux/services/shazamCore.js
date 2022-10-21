@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { build } from 'vite';
 
 
   export const shazamCoreApi = createApi({
@@ -13,9 +14,13 @@ import { createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
     }),
     endpoints: (builder) => ({
         getTopCharts: builder.query({ query:() => '/charts/world' }),
+        getSongDetails: builder.query({ query: ({ songid }) => `/tracks/details?track_id=${songid}` }),
+        getSongRelated: builder.query({ query: ({ songid }) => `/tracks/related?track_id=${songid}` }),
     }),
   });
 
   export const {
     useGetTopChartsQuery,
+    useGetSongDetailsQuery,
+    useGetSongRelatedQuery,
   } = shazamCoreApi
